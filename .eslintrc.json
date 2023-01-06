@@ -38,6 +38,7 @@
             "double",
             {"avoidEscape": true, "allowTemplateLiterals": true}
         ],
+        "@typescript-eslint/no-unsafe-assignment": "off",
         "@typescript-eslint/quotes": [
             "error",
             "double",
