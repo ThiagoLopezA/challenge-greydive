@@ -46,12 +46,11 @@ export default function Survey(): JSX.Element {
     console.log(values);
   };
   const formik = useFormik({ validationSchema, initialValues, onSubmit });
-
   return (
-    <form>
+    <form onSubmit={formik.handleSubmit}>
       <Stack spacing={2}>
         {inputs.map((item: SurveyItem, i: number) => {
-          return <ItemHandler key={i} input={item} />;
+          return <ItemHandler key={i} input={item} config={formik} />;
         })}
       </Stack>
     </form>

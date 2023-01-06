@@ -17,3 +17,11 @@ export interface SurveyItem {
   required?: boolean;
   options?: SurveyOption[];
 }
+
+// export interface ItemConfig {
+//   handleSubmit: () => void;
+//   handleChange: () => void;
+//   values: object;
+//   errors: object;
+//   touched: object;
+// }
