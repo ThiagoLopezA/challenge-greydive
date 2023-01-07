@@ -1,20 +1,29 @@
-import { SurveyItem, ItemType } from "../../types";
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+import { SurveyItem } from "../../types";
 import { Stack } from "@mui/material";
 import { items } from "../../json/db.json";
 import { ItemHandler } from "../../components";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 
-const valuesInitializer = (inputs: SurveyItem[]): object => {
+const valuesInitializer = (inputs: SurveyItem[]) => {
   const values = inputs.reduce((obj, item) => {
     if (item.name != null) {
       const name: string = item.name;
+      if (item.type === "checkbox") return { ...obj, [name]: false };
+      if (item.type === "date") return { ...obj, [name]: new Date() };
       return { ...obj, [name]: "" };
     }
     return { ...obj };
   }, {});
   return values;
 };
+
+type Schemas =
+  | Yup.StringSchema
+  | Yup.NumberSchema
+  | Yup.BooleanSchema
+  | Yup.DateSchema;
 
 const validationsInitializer = (inputs: SurveyItem[]): object => {
   const cases = {
@@ -25,11 +34,15 @@ const validationsInitializer = (inputs: SurveyItem[]): object => {
     checkbox: Yup.boolean(),
     date: Yup.date(),
   };
-  // const validations = {};
   const validations = inputs.reduce((vals, item) => {
-    if (item.name != null) {
+    if (item.name != null && item.type !== "submit") {
       const name: string = item.name;
-      const initial = cases[item.type as ItemType];
+      const initial: Schemas = cases[item.type];
+      if (item.required !== null && item.required === true)
+        return {
+          ...vals,
+          [name]: initial.required("Este campo es requerido"),
+        };
       return { ...vals, [name]: initial };
     }
     return { ...vals };
@@ -39,13 +52,14 @@ const validationsInitializer = (inputs: SurveyItem[]): object => {
 };
 
 export default function Survey(): JSX.Element {
-  const inputs: SurveyItem[] = items;
+  const inputs = items as SurveyItem[];
   const initialValues = valuesInitializer(inputs);
   const validationSchema = validationsInitializer(inputs);
   const onSubmit = (values: object): void => {
     console.log(values);
   };
-  const formik = useFormik({ validationSchema, initialValues, onSubmit });
+  const formik = useFormik({ initialValues, validationSchema, onSubmit });
+  console.log(formik.errors);
   return (
     <form onSubmit={formik.handleSubmit}>
       <Stack spacing={2}>

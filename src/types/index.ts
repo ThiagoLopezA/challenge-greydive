@@ -8,20 +8,13 @@ export type ItemType =
   | "email"
   | "checkbox"
   | "select"
-  | "date";
+  | "date"
+  | "submit";
 
 export interface SurveyItem {
-  type: string;
+  type: ItemType;
   label: string;
-  name?: string;
+  name: string;
   required?: boolean;
   options?: SurveyOption[];
 }
-
-// export interface ItemConfig {
-//   handleSubmit: () => void;
-//   handleChange: () => void;
-//   values: object;
-//   errors: object;
-//   touched: object;
-// }

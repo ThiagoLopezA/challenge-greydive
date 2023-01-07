@@ -8,7 +8,7 @@ interface Props {
 
 export default function AppProvider({ children }: Props): JSX.Element {
   return (
-    <LocalizationProvider dateAdapter={AdapterMoment}>
+    <LocalizationProvider dateAdapter={AdapterMoment} adapterLocale="es">
       <BrowserRouter>{children}</BrowserRouter>
     </LocalizationProvider>
   );
