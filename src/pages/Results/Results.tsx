@@ -5,8 +5,8 @@ import { ChartCountries, ChartCountriesFallback } from "@/components";
 import { FormResponse } from "@/types";
 
 export default function Results(): JSX.Element {
-  const [results, setResults] = useState([] as FormResponse[]);
-  const [loading, setLoading] = useState(true);
+  const [results, setResults] = useState<FormResponse[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const handleResponses = async (): Promise<void> => {
     try {
