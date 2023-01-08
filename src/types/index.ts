@@ -1,3 +1,4 @@
+import * as Yup from "yup";
 export interface SurveyOption {
   label: string;
   value: string;
@@ -17,4 +18,21 @@ export interface SurveyItem {
   name: string;
   required?: boolean;
   options?: SurveyOption[];
+}
+
+export type Schemas =
+  | Yup.StringSchema
+  | Yup.NumberSchema
+  | Yup.BooleanSchema
+  | Yup.DateSchema;
+
+export interface FormResponse {
+  birth_date: {
+    nanoseconds: number;
+    seconds: number;
+  };
+  country_of_origin: string;
+  email: string;
+  full_name: string;
+  terms_and_conditions: boolean;
 }

@@ -79,10 +79,18 @@ function DateField({ item, config }: FieldProps): JSX.Element {
         handleDate(date, name);
       }}
       value={config.values[name]}
+      PopperProps={{
+        placement: "auto",
+      }}
       inputFormat="DD-MM-yyyy"
       renderInput={(params: JSX.IntrinsicAttributes & TextFieldProps) => (
         <TextField
           {...params}
+          sx={{
+            "& .MuiSelected": {
+              color: "red",
+            },
+          }}
           name={name}
           error={
             (config.touched[name] ?? false) && Boolean(config.errors[name])
@@ -96,7 +104,11 @@ function DateField({ item, config }: FieldProps): JSX.Element {
 
 function SubmitField({ item, config }: FieldProps): JSX.Element {
   const { label } = item;
-  return <Button type="submit">{label}</Button>;
+  return (
+    <Button type="submit" variant="primary" size="large">
+      {label}
+    </Button>
+  );
 }
 
 function CheckField({ item, config }: FieldProps): JSX.Element {
@@ -109,6 +121,12 @@ function CheckField({ item, config }: FieldProps): JSX.Element {
           checked={Boolean(config.values[name])}
           onChange={config.handleChange}
           required={isRequired}
+          sx={{
+            color: "#d30070",
+            "&.Mui-checked": {
+              color: "#d30070",
+            },
+          }}
         />
       }
       label={label}

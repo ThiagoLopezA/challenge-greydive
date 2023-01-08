@@ -1,5 +1,11 @@
 export { default as AppProvider } from "./AppProvider/AppProvider";
+export { default as ChartCountries } from "./Elements/Charts/ChartCountries/ChartCountries";
+export { default as ChartCountriesFallback } from "./Elements/Charts/ChartCountries/ChartCountriesFallback";
 export { default as InputField } from "./Elements/InputField/InputField";
 export { default as ItemHandler } from "./Elements/ItemHandler/ItemHandler";
+export { default as Navbar } from "./Elements/Navbar/Navbar";
+export { default as PieChart } from "./Elements/PieChart/PieChart";
 export { default as SelectField } from "./Elements/SelectField/SelectField";
+export { default as SurveyForm } from "./Forms/SurveyForm";
+export { default as Layout } from "./Layout/Layout";
 export * from "./index";
