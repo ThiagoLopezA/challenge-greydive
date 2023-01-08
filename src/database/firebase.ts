@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyANY4AxyLmAooSSRgNTHc407IUqVfA4P10",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY as string,
   authDomain: "challenge-greydive-2a326.firebaseapp.com",
   projectId: "challenge-greydive-2a326",
   storageBucket: "challenge-greydive-2a326.appspot.com",
