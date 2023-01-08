@@ -6,6 +6,7 @@
       "name": "full_name",
       "required": true
     },
+
     {
       "type": "email",
       "label": "Correo electrónico",

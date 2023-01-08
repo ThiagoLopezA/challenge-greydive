@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+import { FormikProps } from "formik";
 export interface SurveyOption {
   label: string;
   value: string;
@@ -35,4 +36,14 @@ export interface FormResponse {
   email: string;
   full_name: string;
   terms_and_conditions: boolean;
+}
+
+// eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
+export interface FieldValues {
+  [key: string]: string;
+}
+
+export interface FieldProps {
+  item: SurveyItem;
+  config: FormikProps<FieldValues>;
 }

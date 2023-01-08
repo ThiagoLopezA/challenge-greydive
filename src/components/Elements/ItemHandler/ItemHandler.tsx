@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import { SurveyItem } from "../../../types";
+import { SurveyItem, FieldProps, FieldValues } from "@/types";
 import {
   TextField,
   Checkbox,
@@ -7,21 +7,13 @@ import {
   Button,
   TextFieldProps,
   FormControlLabel,
+  Box,
 } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { FormikProps } from "formik";
 import moment from "moment";
 
 // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
-interface FieldValues {
-  [key: string]: string;
-}
-
-interface FieldProps {
-  item: SurveyItem;
-  config: FormikProps<FieldValues>;
-}
-
 interface Props {
   input: SurveyItem;
   config: FormikProps<FieldValues>;
@@ -151,6 +143,18 @@ export default function ItemHandler({ input, config }: Props): JSX.Element {
     case "submit":
       return <SubmitField item={input} config={config} />;
     default:
-      return <>Type error</>;
+      return (
+        <Box
+          sx={{
+            backgroundColor: "#e57373",
+            padding: 2,
+            borderRadius: 1,
+            border: "1px solid #d32f2f",
+            color: "#f3f3f3",
+          }}
+        >
+          El tipo asignado en el JSON no es valido.
+        </Box>
+      );
   }
 }
