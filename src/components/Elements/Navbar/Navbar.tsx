@@ -9,8 +9,9 @@ export default function Navbar(): JSX.Element {
       sx={{
         width: "100%",
         display: "flex",
+        height: 40,
+        margin: 4,
         justifyContent: "center",
-        marginBottom: 2,
       }}
     >
       <ButtonGroup>

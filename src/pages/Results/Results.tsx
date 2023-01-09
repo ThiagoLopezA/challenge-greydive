@@ -1,7 +1,14 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useEffect, useState } from "react";
 import { getResponses } from "@/database";
-import { ChartCountries, ChartCountriesFallback } from "@/components";
+import {
+  ChartCountries,
+  ChartCountriesFallback,
+  Container,
+  Response,
+  ResponseFallback,
+} from "@/components";
+import { Grid, Stack } from "@mui/material";
 import { FormResponse } from "@/types";
 
 export default function Results(): JSX.Element {
@@ -25,7 +32,26 @@ export default function Results(): JSX.Element {
 
   return (
     <>
-      {loading ? <ChartCountriesFallback /> : <ChartCountries data={results} />}
+      <Grid item xs={11} md={4}>
+        <Container>
+          {loading ? (
+            <ChartCountriesFallback />
+          ) : (
+            <ChartCountries data={results} />
+          )}
+        </Container>
+      </Grid>
+      <Grid item xs={11} md={8} lg={8}>
+        {loading ? (
+          <ResponseFallback />
+        ) : (
+          <Stack>
+            {results.map((result, i) => {
+              return <Response key={i} data={result} />;
+            })}
+          </Stack>
+        )}
+      </Grid>
     </>
   );
 }

@@ -1,21 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormResponse } from "@/types";
 import PieChart from "../../PieChart/PieChart";
 
-interface Props {
-  data: FormResponse[];
-}
-
-type Country =
-  | "brasil"
-  | "argentina"
-  | "chile"
-  | "colombia"
-  | "mexico"
-  | "peru"
-  | "uruguay"
-  | "venezuela";
-const countries = {
+export const countries = {
   brasil: {
     amount: 0,
     color: "#47C15A",
@@ -50,6 +37,19 @@ const countries = {
   },
 };
 
+interface Props {
+  data: FormResponse[];
+}
+type Country =
+  | "brasil"
+  | "argentina"
+  | "chile"
+  | "colombia"
+  | "mexico"
+  | "peru"
+  | "uruguay"
+  | "venezuela";
+
 export default function ChartCountries({ data }: Props): JSX.Element {
   const [dataset, setDataset] = useState({
     labels: [""],
@@ -61,19 +61,15 @@ export default function ChartCountries({ data }: Props): JSX.Element {
       },
     ],
   });
-  const cleaner = (): void => {
-    Object.keys(countries).forEach((country) => {
-      countries[country as Country].amount = 0;
-    });
-  };
   const handleCountriesData = (): void => {
     data.forEach((response) => {
       countries[response.country_of_origin as Country].amount += 1;
     });
   };
-
   const prepareDataset = (): void => {
-    const labels = Object.keys(countries);
+    const labels = Object.keys(countries).map(
+      (name) => name.charAt(0).toUpperCase() + name.slice(1),
+    );
     const data = Object.values(countries).map((country) => country.amount);
     const backgroundColor = Object.values(countries).map(
       (country) => country.color,
@@ -92,9 +88,14 @@ export default function ChartCountries({ data }: Props): JSX.Element {
   };
 
   useEffect(() => {
-    cleaner();
     handleCountriesData();
     prepareDataset();
+
+    return () => {
+      Object.keys(countries).forEach((country) => {
+        countries[country as Country].amount = 0;
+      });
+    };
   }, []);
 
   return <PieChart config={dataset} />;

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { SurveyForm } from "@/components";
+import { SurveyForm, Container } from "@/components";
+import { Grid } from "@mui/material";
 import { items } from "@/data/db.json";
 import { SurveyItem, Schemas } from "@/types";
 import { alerts } from "@/utils/alerts.utils";
@@ -66,5 +67,11 @@ export default function Survey(): JSX.Element {
   const initialValues = valuesInitializer(inputs);
   const validationSchema = validationsInitializer(inputs);
   const formik = useFormik({ validationSchema, initialValues, onSubmit });
-  return <SurveyForm formik={formik} inputs={inputs} />;
+  return (
+    <Grid item xs={11} md={6} lg={4}>
+      <Container>
+        <SurveyForm formik={formik} inputs={inputs} />
+      </Container>
+    </Grid>
+  );
 }

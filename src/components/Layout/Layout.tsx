@@ -6,30 +6,18 @@ import { Outlet } from "react-router-dom";
 const Wrapper = styled(Grid)({
   display: "flex",
   justifyContent: "center",
-  alignItems: "center",
   minHeight: "100vh",
+  width: "100vw",
   backgroundColor: "#303030",
   margin: 0,
-});
-
-const Container = styled(Box)({
-  backgroundColor: "#fff",
-  padding: 20,
-  borderRadius: 5,
-  border: "1px solid #ccc",
-  boxShadow: "rgba(209, 65, 90, 0.2) 0px 7px 29px 0px",
-  minHeight: "27rem",
+  padding: "1rem",
 });
 
 export default function Layout(): JSX.Element {
   return (
-    <Wrapper container>
-      <Grid item xs={11} md={6} lg={4}>
-        <Navbar />
-        <Container>
-          <Outlet />
-        </Container>
-      </Grid>
+    <Wrapper container spacing={1}>
+      <Navbar />
+      <Outlet />
     </Wrapper>
   );
 }
