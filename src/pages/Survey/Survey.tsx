@@ -6,6 +6,7 @@ import { SurveyItem, Schemas } from "@/types";
 import { alerts } from "@/utils/alerts.utils";
 import { useFormik } from "formik";
 import { saveResponse } from "@/database";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const checkType = (type: string): boolean => {
@@ -55,6 +56,7 @@ const validationsInitializer = (inputs: SurveyItem[]): object => {
 };
 
 export default function Survey(): JSX.Element {
+  const navigate = useNavigate();
   const inputs = items as SurveyItem[];
   const onSubmit = async (values: object): Promise<void> => {
     await saveResponse(values);
@@ -62,6 +64,7 @@ export default function Survey(): JSX.Element {
       "¡Gracias por responder este formulario!",
       "Tu respuesta fue guardada con exito",
     );
+    navigate("/results");
     formik.resetForm();
   };
   const initialValues = valuesInitializer(inputs);

@@ -8,7 +8,7 @@ export const alerts = {
       icon: "success",
       iconColor: "#d30070",
       confirmButtonColor: "#d30070",
-      confirmButtonText: "Cerrar",
+      confirmButtonText: "Ver respuestas",
     });
   },
 };
